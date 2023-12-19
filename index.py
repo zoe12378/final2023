@@ -14,9 +14,9 @@ app = Flask(__name__)
 # 靜態網頁
 @app.route('/')
 def index():
-    homepage = "<br><a href=/webhook3>webhook3</a><br>"
-    homepage = "<br><a href=/webhook4>webhook4</a><br>"
-    homepage = "<br><a href=/webhook5>webhook5</a><br>"
+    homepage = "<br><a href=/webhook3>webhook3</a>"
+    homepage = "<br><a href=/webhook4>webhook4</a>"
+    homepage = "<br><a href=/webhook5>webhook5</a>"
     return homepage
 
 @app.route("/webhook3", methods=["POST"])

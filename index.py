@@ -28,6 +28,7 @@ def webhook3():
     if (action == "rateChoice"):
         rate =  req.get("queryResult").get("parameters").get("rate")
         info = "我是黃昕柔開發的電影聊天機器人,您選擇的電影分級是：" + rate + "，相關電影：\n"
-
+    return make_response(jsonify({"fulfillmentText": info}))
+    
 if __name__ == '__main__':
     app.run(debug=True)

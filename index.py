@@ -25,10 +25,23 @@ def webhook3():
     action =  req.get("queryResult").get("action")
     #msg =  req.get("queryResult").get("queryText")
     #info = "動作：" + action + "； 查詢內容：" + msg
-    if (action == "rateChoice"):
-        rate =  req.get("queryResult").get("parameters").get("rate")
-        info = "我是黃昕柔開發的電影聊天機器人,您選擇的電影分級是：" + rate + "，相關電影：\n"
-    return make_response(jsonify({"fulfillmentText": info}))
-    
+    if (action == "hahowclass"):
+        rate =  req.get("queryResult").get("parameters").get("title")
+        info = ("我是hahow的課程查詢機器人,您選擇的課程是：") + title + "，價錢：\n" + price
+
+        db = firestore.client()
+        collection_ref = db.collection("課程")
+        docs = collection_ref.get()
+        result = ""
+        for doc in docs:
+            dict = doc.to_dict()
+            if rate in dict["rate"]:
+                result += "課程名稱：" + dict["title"] + "\n"
+                result += "開課單位：" + dict["owner_name"] + "\n"
+                result += "開課人數: " + dict["student_number"] + "\n\n"
+        info += result
+
+    return make_response(jsonify({"hahowText": info}))
+
 if __name__ == '__main__':
     app.run(debug=True)

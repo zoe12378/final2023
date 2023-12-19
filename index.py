@@ -27,7 +27,7 @@ def webhook3():
     #info = "動作：" + action + "； 查詢內容：" + msg
     if (action == "rateChoice"):
         rate =  req.get("queryResult").get("parameters").get("rate")
-        info = "我是楊子青開發的電影聊天機器人,您選擇的電影分級是：" + rate + "，相關電影：\n"
+        info = "我是黃昕柔開發的電影聊天機器人,您選擇的電影分級是：" + rate + "，相關電影：\n"
 
 if __name__ == '__main__':
     app.run(debug=True)

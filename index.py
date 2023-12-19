@@ -14,7 +14,9 @@ app = Flask(__name__)
 # 靜態網頁
 @app.route('/')
 def index():
-    homepage = "<br><a href=/webhook3>課程查詢</a><br>"
+    homepage = "<br><a href=/webhook3>webhook3</a><br>"
+    homepage = "<br><a href=/webhook4>webhook4</a><br>"
+    homepage = "<br><a href=/webhook5>webhook5</a><br>"
     return homepage
 
 @app.route("/webhook3", methods=["POST"])
@@ -28,20 +30,105 @@ def webhook3():
     if (action == "hahowclass"):
         rate =  req.get("queryResult").get("parameters").get("title")
         info = ("我是hahow的課程查詢機器人,您選擇的課程是：") + title + "，價錢：\n" + price
-
         db = firestore.client()
         collection_ref = db.collection("課程")
         docs = collection_ref.get()
         result = ""
         for doc in docs:
             dict = doc.to_dict()
-            if rate in dict["rate"]:
+            if rate in dict["title"]:
                 result += "課程名稱：" + dict["title"] + "\n"
                 result += "開課單位：" + dict["owner_name"] + "\n"
                 result += "開課人數: " + dict["student_number"] + "\n\n"
         info += result
 
     return make_response(jsonify({"hahowText": info}))
+
+
+
+@app.route("/webhook4", methods=["POST"])
+def webhook4():
+    req = request.get_json(force=True)
+    action =  req["queryResult"]["action"]
+    #action 叫 courseChoice
+    if (action == "courseChoice"):
+        #action 裡的 PARAMETER NAME 是 title
+        title =  req["queryResult"]["parameters"]["title"]
+        info = ("我是hahow的課程查詢機器人,您選擇的課程是：") + title + "，相關課程：\n"
+
+        db = firestore.client()
+        #firebase 的名字叫 課程
+        collection_ref = db.collection("課程")
+        docs = collection_ref.get()
+        result = ""
+        for doc in docs:
+            dict = doc.to_dict()
+            if title in dict["title"]:
+                result += "課程名稱：" + dict["title"] + "\n"
+                result += "開課單位：" + dict["owner_name"] + "\n"
+                result += "開課人數: " + dict["student_number"] + "\n\n"
+        info += result
+    #開一個Intent
+    #action 叫 hahowclass
+    elif (action == "hahowclass"):
+        #action 裡的 PARAMETER NAME 是 owner_name、any
+        owner_name =  req["queryResult"]["parameters"]["owner_name"]
+        keyword =  req.get("queryResult").get("parameters").get("any")
+        info = ("我是hahow的課程查詢機器人,您要查詢的課程是：") + owner_name + "，關鍵字是：" + keyword +"\n\n"
+    return make_response(jsonify({"fulfillmentText": info}))
+
+
+
+
+@app.route("/webhook5", methods=["POST"])
+def webhook5():
+    req = request.get_json(force=True)
+    action =  req["queryResult"]["action"]
+    #action 叫 courseChoice
+    if (action == "courseChoice"):
+        #action 裡的 PARAMETER NAME 是 title
+        title =  req["queryResult"]["parameters"]["title"]
+        info = ("我是hahow的課程查詢機器人,您選擇的課程是：") + title + "，相關課程：\n"
+
+        db = firestore.client()
+        #firebase 的名字叫 課程
+        collection_ref = db.collection("課程")
+        docs = collection_ref.get()
+        result = ""
+        for doc in docs:
+            dict = doc.to_dict()
+            if title in dict["title"]:
+                result += "課程名稱：" + dict["title"] + "\n"
+                result += "開課單位：" + dict["owner_name"] + "\n"
+                result += "開課人數: " + dict["student_number"] + "\n\n"
+        info += result
+    #開一個Intent
+    #action 叫 hahowclass
+    elif (action == "hahowclass"):
+        #action 裡的 PARAMETER NAME 是 owner_name、any
+        owner_name =  req["queryResult"]["parameters"]["owner_name"]
+        keyword =  req.get("queryResult").get("parameters").get("any")
+        info = "我是hahow的課程查詢機器人,您要查詢課程：" + owner_name + "，關鍵字是：" + keyword +"\n\n"
+        if (question == "課程單位"):
+            db = firestore.client()
+            collection_ref = db.collection("課程")
+            docs = collection_ref.get()
+            found = False
+            for doc in docs:
+                dict = doc.to_dict()
+                if keyword in dict["title"]:
+                    found = True 
+                    info += "課程名稱：" + dict["title"] + "\n"
+                    info += "開課單位：" + dict["owner_name"] + "\n"
+                    info += "價錢：" + dict["price"] + "\n"
+                    info += "開課人數: " + dict["student_number"] + "\n\n"
+            if not found:
+                info += "很抱歉，目前無符合這個關鍵字的相關課程喔"
+
+    return make_response(jsonify({"fulfillmentText": info}))
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

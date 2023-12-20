@@ -42,8 +42,7 @@ def webhook3():
                 result += "開課人數: " + dict["student_number"] + "\n\n"
         info += result
 
-    return make_response(jsonify({"hahowText": info}))
-
+    return make_response(jsonify({"fulfillmentText": info}))
 
 
 @app.route("/webhook4", methods=["POST"])

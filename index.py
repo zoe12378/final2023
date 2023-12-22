@@ -14,7 +14,7 @@ app = Flask(__name__)
 # 靜態網頁
 @app.route('/')
 def index():
-    homepage = "<br><a href=/webhook3>zzzz3</a>"
+    homepage = "<br><a href=/webhook3>3</a>"
     homepage += "<br><a href=/webhook4>4</a>"
     homepage += "<br><a href=/webhook5>5</a>"
     return homepage
@@ -65,7 +65,7 @@ def webhook4():
             if title in dict["title"]:
                 result += "課程名稱：" + dict["title"] + "\n"
                 result += "開課單位：" + dict["owner_name"] + "\n"
-                result += "開課人數: " + dict["student_number"] + "\n\n"
+                result += "開課人數: " + str(dict["student_number"]) + "\n\n"
         info += result
     #開一個Intent
     #action 叫 hahowclass

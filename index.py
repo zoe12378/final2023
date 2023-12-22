@@ -16,7 +16,7 @@ app = Flask(__name__)
 def index():
     homepage = "<br><a href=/webhook3>3</a>"
     homepage += "<br><a href=/webhook4>4</a>"
-    homepage += "<br><a href=/webhook5>555</a>"
+    homepage += "<br><a href=/webhook5>5</a>"
     return homepage
 
 @app.route("/webhook3", methods=["POST"])
@@ -104,8 +104,8 @@ def webhook5():
     #action 叫 hahowclass
     elif (action == "hahowclass"):
         #action 裡的 PARAMETER NAME 是 owner_name、any
-        any =  req.get("queryResult").get("parameters").get("any")
-        info = "我是hahow的課程查詢機器人,您要查詢開課單位："+ any +"\n\n"
+        owner_name =  req.get("queryResult").get("parameters").get("owner_name")
+        info = "我是hahow的課程查詢機器人,您要查詢開課單位："+ owner_name +"\n\n"
         if (question == "開課單位"):
             db = firestore.client()
             collection_ref = db.collection("課程")
@@ -113,7 +113,7 @@ def webhook5():
             found = False
             for doc in docs:
                 dict = doc.to_dict()
-                if any in dict["owner_name"]:
+                if owner_name in dict["owner_name"]:
                     found = True 
                     info += "課程名稱：" + dict["title"] + "\n"
                     info += "開課單位：" + dict["owner_name"] + "\n"

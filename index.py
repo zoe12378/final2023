@@ -16,7 +16,7 @@ app = Flask(__name__)
 def index():
     homepage = "<br><a href=/webhook3>3</a>"
     homepage += "<br><a href=/webhook4>4</a>"
-    homepage += "<br><a href=/webhook5>5</a>"
+    homepage += "<br><a href=/webhook5>f5</a>"
     return homepage
 
 @app.route("/webhook3", methods=["POST"])
@@ -99,6 +99,7 @@ def webhook5():
                 result += "課程名稱：" + dict["title"] + "\n"
                 result += "開課單位：" + dict["owner_name"] + "\n"
                 result += "開課人數: " + str(dict["student_number"]) + "\n\n"
+                break
         info += result
     #開一個Intent
     #action 叫 hahowclass
@@ -110,15 +111,18 @@ def webhook5():
         db = firestore.client()
         collection_ref = db.collection("課程")
         docs = collection_ref.get()
+        result = ""
         found = False
         for doc in docs:
             dict = doc.to_dict()
             if owner_name in dict["owner_name"]:
                 found = True 
-                info += "課程名稱：" + dict["title"] + "\n"
-                info += "開課單位：" + dict["owner_name"] + "\n"
-                info += "價錢：" + str(dict["price"]) + "\n"
-                info += "開課人數: " + str(dict["student_number"]) + "\n\n"
+                result += "課程名稱：" + dict["title"] + "\n"
+                result += "開課單位：" + dict["owner_name"] + "\n"
+                result += "價錢：" + str(dict["price"]) + "\n"
+                result += "開課人數: " + str(dict["student_number"]) + "\n\n"
+                break
+        info += result
         if not found:
             info += "很抱歉，目前無符合這個關鍵字的相關課程喔"
 

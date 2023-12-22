@@ -16,7 +16,7 @@ app = Flask(__name__)
 def index():
     homepage = "<br><a href=/webhook3>3</a>"
     homepage += "<br><a href=/webhook4>4</a>"
-    homepage += "<br><a href=/webhook5>5</a>"
+    homepage += "<br><a href=/webhook5>z5</a>"
     return homepage
 
 @app.route("/webhook3", methods=["POST"])
@@ -113,7 +113,7 @@ def webhook5():
             found = False
             for doc in docs:
                 dict = doc.to_dict()
-                if keyword in dict["title"]:
+                if keyword in dict["owner_name"]:
                     found = True 
                     info += "課程名稱：" + dict["title"] + "\n"
                     info += "開課單位：" + dict["owner_name"] + "\n"

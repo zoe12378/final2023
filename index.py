@@ -16,7 +16,7 @@ app = Flask(__name__)
 def index():
     homepage = "<br><a href=/webhook3>3</a>"
     homepage += "<br><a href=/webhook4>4</a>"
-    homepage += "<br><a href=/webhook5>5</a>"
+    homepage += "<br><a href=/webhook5>55</a>"
     return homepage
 
 @app.route("/webhook3", methods=["POST"])
@@ -106,7 +106,7 @@ def webhook5():
         #action 裡的 PARAMETER NAME 是 owner_name、any
         keyword =  req.get("queryResult").get("parameters").get("any")
         info = "我是hahow的課程查詢機器人,您要查詢開課單位："+ keyword +"\n\n"
-        if (question == "課程單位"):
+        if (question == "開課單位"):
             db = firestore.client()
             collection_ref = db.collection("課程")
             docs = collection_ref.get()

@@ -29,7 +29,7 @@ def webhook3():
     #info = "動作：" + action + "； 查詢內容：" + msg
     if (action == "hahowclass"):
         rate =  req.get("queryResult").get("parameters").get("title")
-        info = ("我是hahow的課程查詢機器人,您選擇的課程是：") + title + "，價錢：\n" + price
+        info = "我是hahow的課程查詢機器人,您選擇的課程是：" + title + "，價錢：\n" + price
         db = firestore.client()
         collection_ref = db.collection("課程")
         docs = collection_ref.get()
@@ -53,7 +53,7 @@ def webhook4():
     if (action == "courseChoice"):
         #action 裡的 PARAMETER NAME 是 title
         title =  req["queryResult"]["parameters"]["title"]
-        info = ("我是hahow的課程查詢機器人,您選擇的課程是：") + title + "，相關課程：\n"
+        info = "我是hahow的課程查詢機器人,您選擇的課程是：" + title + "，相關課程：\n"
 
         db = firestore.client()
         #firebase 的名字叫 課程
@@ -73,7 +73,7 @@ def webhook4():
         #action 裡的 PARAMETER NAME 是 owner_name、any
         owner_name =  req["queryResult"]["parameters"]["owner_name"]
         keyword =  req.get("queryResult").get("parameters").get("any")
-        info = ("我是hahow的課程查詢機器人,您要查詢的課程是：") + owner_name + "，關鍵字是：" + keyword +"\n\n"
+        info = "我是hahow的課程查詢機器人,您要查詢的課程是：" + owner_name + "，關鍵字是：" + keyword +"\n\n"
     return make_response(jsonify({"fulfillmentText": info}))
 
 
@@ -87,7 +87,7 @@ def webhook5():
     if (action == "courseChoice"):
         #action 裡的 PARAMETER NAME 是 title
         title =  req["queryResult"]["parameters"]["title"]
-        info = ("我是hahow的課程查詢機器人,您選擇的課程是：") + title + "，相關課程：\n"
+        info = "我是hahow的課程查詢機器人,您選擇的課程是：" + title + "，相關課程：\n"
 
         db = firestore.client()
         #firebase 的名字叫 課程

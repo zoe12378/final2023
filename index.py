@@ -98,6 +98,7 @@ def webhook5():
             if title in dict["title"]:
                 result += "課程名稱：" + dict["title"] + "\n"
                 result += "開課單位：" + dict["owner_name"] + "\n"
+                result += "價錢：" + str(dict["price"]) + "\n"
                 result += "開課人數: " + str(dict["student_number"]) + "\n\n"
                 break
         info += result

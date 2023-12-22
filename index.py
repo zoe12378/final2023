@@ -55,18 +55,18 @@ def webhook4():
         title =  req["queryResult"]["parameters"]["title"]
         info = "我是hahow的課程查詢機器人,您選擇的課程是：" + title + "，相關課程：\n"
 
-        db = firestore.client()
-        #firebase 的名字叫 課程
-        collection_ref = db.collection("課程")
-        docs = collection_ref.get()
-        result = ""
-        for doc in docs:
-            dict = doc.to_dict()
-            if title in dict["title"]:
-                result += "課程名稱：" + dict["title"] + "\n"
-                result += "開課單位：" + dict["owner_name"] + "\n"
-                result += "開課人數: " + dict["student_number"] + "\n\n"
-        info += result
+        # db = firestore.client()
+        # #firebase 的名字叫 課程
+        # collection_ref = db.collection("課程")
+        # docs = collection_ref.get()
+        # result = ""
+        # for doc in docs:
+        #     dict = doc.to_dict()
+        #     if title in dict["title"]:
+        #         result += "課程名稱：" + dict["title"] + "\n"
+        #         result += "開課單位：" + dict["owner_name"] + "\n"
+        #         result += "開課人數: " + dict["student_number"] + "\n\n"
+        # info += result
     #開一個Intent
     #action 叫 hahowclass
     elif (action == "hahowclass"):

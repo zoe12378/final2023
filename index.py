@@ -16,7 +16,7 @@ app = Flask(__name__)
 def index():
     homepage = "<br><a href=/webhook3>3</a>"
     homepage += "<br><a href=/webhook4>4</a>"
-    homepage += "<br><a href=/webhook5>5</a>"
+    homepage += "<br><a href=/webhook5>zz5</a>"
     return homepage
 
 @app.route("/webhook3", methods=["POST"])
@@ -71,9 +71,8 @@ def webhook4():
     #action 叫 hahowclass
     elif (action == "hahowclass"):
         #action 裡的 PARAMETER NAME 是 owner_name、any
-        owner_name =  req["queryResult"]["parameters"]["owner_name"]
         keyword =  req.get("queryResult").get("parameters").get("any")
-        info = "我是hahow的課程查詢機器人,您要查詢的課程是：" + owner_name + "，關鍵字是：" + keyword +"\n\n"
+        info = "我是hahow的課程查詢機器人,您要查詢的課程單位是："+ keyword +"\n\n"
     return make_response(jsonify({"fulfillmentText": info}))
 
 

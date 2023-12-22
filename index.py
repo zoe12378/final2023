@@ -15,7 +15,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     homepage = "<br><a href=/webhook3>zzzz3</a>"
-    homepage += "<br><a href=/webhook4>4</a>"
+    homepage += "<br><a href=/webhook4>zzzzz4</a>"
     homepage += "<br><a href=/webhook5>5</a>"
     return homepage
 
@@ -59,13 +59,13 @@ def webhook4():
         #firebase 的名字叫 課程
         collection_ref = db.collection("課程")
         docs = collection_ref.get()
-        # result = ""
-        # for doc in docs:
-        #     dict = doc.to_dict()
-        #     if title in dict["title"]:
-        #         result += "課程名稱：" + dict["title"] + "\n"
-        #         result += "開課單位：" + dict["owner_name"] + "\n"
-        #         result += "開課人數: " + dict["student_number"] + "\n\n"
+        result = ""
+        for doc in docs:
+            dict = doc.to_dict()
+            if title in dict["title"]:
+                result += "課程名稱：" + dict["title"] + "\n"
+                result += "開課單位：" + dict["owner_name"] + "\n"
+                result += "開課人數: " + dict["student_number"] + "\n\n"
         # info += result
     #開一個Intent
     #action 叫 hahowclass

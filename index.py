@@ -106,7 +106,7 @@ def webhook5():
         #action 裡的 PARAMETER NAME 是 owner_name、any
         owner_name =  req.get("queryResult").get("parameters").get("owner_name")
         info = "我是hahow的課程查詢機器人,您要查詢開課單位："+ owner_name +"\n\n"
-        if (question == "開課單位"):
+        #if (question == "開課單位"):
             db = firestore.client()
             collection_ref = db.collection("課程")
             docs = collection_ref.get()

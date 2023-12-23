@@ -16,7 +16,7 @@ app = Flask(__name__)
 def index():
     homepage = "<br><a href=/webhook3>3</a>"
     homepage += "<br><a href=/webhook4>4</a>"
-    homepage += "<br><a href=/webhook5>f5</a>"
+    homepage += "<br><a href=/webhook5>5</a>"
     return homepage
 
 @app.route("/webhook3", methods=["POST"])
@@ -86,7 +86,7 @@ def webhook5():
     if (action == "courseChoice"):
         #action 裡的 PARAMETER NAME 是 title
         title =  req["queryResult"]["parameters"]["title"]
-        info = "我是hahow的課程查詢機器人,您選擇的課程是：" + title + "，相關課程：\n"
+        info = "我是hahow的課程查詢機器人,您選擇的課程是：" + title + "\n相關課程：\n\n"
 
         db = firestore.client()
         #firebase 的名字叫 課程
@@ -121,7 +121,7 @@ def webhook5():
                 result += "課程名稱：" + dict["title"] + "\n"
                 result += "開課單位：" + dict["owner_name"] + "\n"
                 result += "價錢：" + str(dict["price"]) + "\n"
-                result += "開課人數: " + str(dict["student_number"]) + "\n\n"
+                result += "開課人數: " + str(dict["student_number"]) + "\n"
                 break
         info += result
         if not found:
